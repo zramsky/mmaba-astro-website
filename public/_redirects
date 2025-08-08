@@ -1,0 +1,7 @@
+# Astro routes for Netlify
+/services/early-intervention-aba /services/early-intervention-aba/index.html 200
+/locations/manchester-nh /locations/manchester-nh/index.html 200
+/blog/early-signs-autism-toddlers-nh /blog/early-signs-autism-toddlers-nh/index.html 200
+
+# Fallback for SPA routes
+/* /index.html 200
