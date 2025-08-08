@@ -1,0 +1,29 @@
+{
+  "name": "mmaba-astro-website",
+  "version": "1.0.0",
+  "description": "Moving Mountains ABA - SEO-optimized website built with Astro",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "lighthouse": "lighthouse http://localhost:4321 --output html --output-path ./lighthouse-report.html",
+    "check-vitals": "npm run build && npm run preview & sleep 5 && npm run lighthouse"
+  },
+  "keywords": [
+    "ABA therapy",
+    "autism",
+    "New Hampshire",
+    "Applied Behavior Analysis"
+  ],
+  "author": "Moving Mountains ABA",
+  "license": "ISC",
+  "dependencies": {
+    "@astrojs/prefetch": "^0.4.1",
+    "@astrojs/sitemap": "^3.4.2",
+    "@astrojs/tailwind": "^6.0.2",
+    "@tailwindcss/typography": "^0.5.16",
+    "astro": "^5.12.8",
+    "tailwindcss": "^3.4.17"
+  }
+}

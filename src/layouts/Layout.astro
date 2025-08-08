@@ -1,0 +1,155 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  keywords?: string;
+  ogType?: string;
+  canonicalURL?: string;
+  noindex?: boolean;
+}
+
+const { 
+  title, 
+  description, 
+  keywords = "ABA therapy, Applied Behavior Analysis, autism therapy, New Hampshire, behavioral intervention", 
+  ogType = "website",
+  canonicalURL,
+  noindex = false
+} = Astro.props;
+
+const currentURL = canonicalURL || Astro.url.href;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content={description}>
+  <meta name="keywords" content={keywords}>
+  <meta name="author" content="Moving Mountains ABA">
+  {noindex ? (
+    <meta name="robots" content="noindex, nofollow">
+  ) : (
+    <meta name="robots" content="index, follow">
+  )}
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:type" content={ogType}>
+  <meta property="og:url" content={currentURL}>
+  <meta property="og:site_name" content="Moving Mountains ABA">
+  <meta property="og:image" content="https://mmaba.net/images/moving-mountains-aba-og.webp">
+  
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content="https://mmaba.net/images/moving-mountains-aba-og.webp">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href={currentURL}>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  
+  <!-- Preload Critical Resources -->
+  <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <title>{title}</title>
+</head>
+<body>
+  <!-- Skip Link for Accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between py-4">
+        <div class="logo">
+          <a href="/" class="text-2xl font-bold text-blue-800 hover:text-blue-900 transition-colors" aria-label="Moving Mountains ABA Home">
+            Moving Mountains ABA
+          </a>
+        </div>
+        <nav class="navigation hidden md:block" role="navigation" aria-label="Main navigation">
+          <ul class="flex space-x-6">
+            <li><a href="/" class="hover:text-blue-700 transition-colors">Home</a></li>
+            <li><a href="/services" class="hover:text-blue-700 transition-colors">Services</a></li>
+            <li><a href="/locations" class="hover:text-blue-700 transition-colors">Locations</a></li>
+            <li><a href="/blog" class="hover:text-blue-700 transition-colors">Resources</a></li>
+            <li><a href="/about" class="hover:text-blue-700 transition-colors">About</a></li>
+            <li><a href="/contact" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">Contact</a></li>
+          </ul>
+        </nav>
+        <button class="mobile-menu-toggle md:hidden" aria-label="Toggle mobile menu" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content" role="main">
+    <slot />
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer bg-gray-800 text-white" role="contentinfo">
+    <div class="container mx-auto px-4 py-8">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div class="footer-section">
+          <h3 class="text-lg font-semibold mb-4">Moving Mountains ABA</h3>
+          <p class="mb-4">Professional ABA therapy services in New Hampshire, helping children with autism reach their full potential through evidence-based treatment.</p>
+          <div class="flex space-x-4">
+            <a href="#" class="hover:text-blue-300 transition-colors" aria-label="Facebook">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M20 10C20 4.477 15.523 0 10 0S0 4.477 0 10c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V10h2.54V7.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V10h2.773l-.443 2.89h-2.33v6.988C16.343 19.128 20 14.991 20 10z" clip-rule="evenodd"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h3 class="text-lg font-semibold mb-4">Services</h3>
+          <ul class="space-y-2">
+            <li><a href="/services/early-intervention-aba" class="hover:text-blue-300 transition-colors">Early Intervention ABA</a></li>
+            <li><a href="/services/school-age-aba" class="hover:text-blue-300 transition-colors">School-Age ABA</a></li>
+            <li><a href="/services/autism-assessments" class="hover:text-blue-300 transition-colors">Autism Assessments</a></li>
+            <li><a href="/services/parent-training" class="hover:text-blue-300 transition-colors">Parent Training</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3 class="text-lg font-semibold mb-4">NH Locations</h3>
+          <ul class="space-y-2">
+            <li><a href="/locations/manchester-nh" class="hover:text-blue-300 transition-colors">Manchester</a></li>
+            <li><a href="/locations/nashua-nh" class="hover:text-blue-300 transition-colors">Nashua</a></li>
+            <li><a href="/locations/concord-nh" class="hover:text-blue-300 transition-colors">Concord</a></li>
+            <li><a href="/locations/derry-nh" class="hover:text-blue-300 transition-colors">Derry</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3 class="text-lg font-semibold mb-4">Contact</h3>
+          <p class="mb-2">Phone: <a href="tel:+16035551234" class="hover:text-blue-300 transition-colors">(603) 555-1234</a></p>
+          <p class="mb-2">Email: <a href="mailto:info@mmaba.net" class="hover:text-blue-300 transition-colors">info@mmaba.net</a></p>
+          <p class="text-sm text-gray-300">Licensed in New Hampshire<br>BCBA Certified Providers</p>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-8 pt-6 text-center">
+        <p>&copy; 2024 Moving Mountains ABA. All rights reserved. | <a href="/privacy" class="hover:text-blue-300 transition-colors">Privacy Policy</a> | <a href="/terms" class="hover:text-blue-300 transition-colors">Terms of Service</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <style>
+    .skip-link {
+      @apply absolute -top-8 left-4 bg-blue-600 text-white px-4 py-2 rounded focus:top-4 z-50 transition-all;
+    }
+  </style>
+</body>
+</html>

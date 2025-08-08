@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+Sitemap: https://mmaba.net/sitemap-index.xml
+
+# Block any admin or private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /wp-admin/
+Disallow: /wp-content/uploads/
+
+# Allow important pages
+Allow: /services/
+Allow: /locations/
+Allow: /blog/
+Allow: /about/
+Allow: /contact/
